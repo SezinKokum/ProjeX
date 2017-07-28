@@ -17,7 +17,7 @@ import java.util.List;
 
 public class ExpandableListAdapters extends BaseExpandableListAdapter {
     private Context context;
-    // Header titles, üyelik türü için
+    // Header titles, üyelik türü için kullanılacaktır
     private List<String> listDataHeader;
     // Child data in format of header title, child title
     private HashMap<String, List<String>> listDataChild;
