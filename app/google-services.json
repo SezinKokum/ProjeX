@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "527068420627",
+    "firebase_url": "https://proje-4b71a.firebaseio.com",
+    "project_id": "proje-4b71a",
+    "storage_bucket": "proje-4b71a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:527068420627:android:7f97f759388e3e13",
+        "android_client_info": {
+          "package_name": "com.tatlicilar.proje"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "527068420627-oo505u780prloud2qrgilhki5ggfvohj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tatlicilar.proje",
+            "certificate_hash": "2630ba80beb06c9895f2f4f83b3726b545f7a989"
+          }
+        },
+        {
+          "client_id": "527068420627-ae3fljqg4jnp1dkbp1hc3tjh7gv7oh9d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXPb03DeH2Qb0aMbxdXG8B7nzmP22pFOw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "527068420627-ae3fljqg4jnp1dkbp1hc3tjh7gv7oh9d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
