@@ -1,5 +1,6 @@
 package com.tatlicilar.proje;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -7,7 +8,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.ChildEventListener;
@@ -18,10 +23,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 import java.util.UUID;
-public class KayitOl extends AppCompatActivity {
+public class KayitOl extends AppCompatActivity implements ExpandableListView.OnChildClickListener{
 
     private static final String TAG = KayitOl.class.getSimpleName();
     private FirebaseDatabase mFirebaseDatabase;
@@ -33,12 +39,27 @@ public class KayitOl extends AppCompatActivity {
     public EditText email;
     private Button kaydol;
     private String userId;
+    private String uyelikTuru;
+    private ExpandableListAdapter mExpandableListAdapter;
+    private ExpandableListView mExpandableListView;
 
+    // Group/parent data
+    private List<String> listDataHeader;
+    private HashMap<String, List<String>> listDataChild;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kayit_ol);
+
+        mExpandableListView = (ExpandableListView) findViewById(R.id.explv1);
+        // Preparing list data
+        prepareListData();
+        mExpandableListAdapter = new ExpandableListAdapters(this, listDataHeader, listDataChild);
+        // Setting list adapter
+        mExpandableListView.setAdapter(mExpandableListAdapter);
+        mExpandableListView.setOnChildClickListener(this);
+
         ad = (EditText) findViewById(R.id.ad);
         soyad = (EditText)findViewById(R.id.soyad);
         password = (EditText)findViewById(R.id.sifre);
@@ -100,7 +121,7 @@ public class KayitOl extends AppCompatActivity {
             userId = mDatabaseReference.push().getKey();
 
 
-        Melek melek = new Melek(add, soyadd, parola, mail);
+        Melek melek = new Melek(add, soyadd, parola, mail,uyelikTuru);
 
         mDatabaseReference.child(userId).setValue(melek);
 
@@ -148,4 +169,32 @@ public class KayitOl extends AppCompatActivity {
 //        if (!TextUtils.isEmpty(email))
 //            mDatabaseReference.child(userId).child("email").setValue(email);
 //    }
+// Preparing the list data
+private void prepareListData() {
+    listDataHeader = new ArrayList<String>();
+    listDataChild = new HashMap<String, List<String>>();
+
+    // Adding group/parent data
+    listDataHeader.add("Üyelik Türü");
+
+    // Adding child1 data
+    List<String> uyelikTuru = new ArrayList<String>();
+    uyelikTuru.add("Melek");
+    uyelikTuru.add("Aile");
+    uyelikTuru.add("Destekçi");
+    uyelikTuru.add("Danışman");
+    uyelikTuru.add("Admin");
+
+    // Header, Child data
+    listDataChild.put(listDataHeader.get(0), uyelikTuru);
+}
+
+    @Override
+    public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
+        TextView mTextView = (TextView) view.findViewById(R.id.tvListItem);
+
+        Toast.makeText(getBaseContext(), mTextView.getText().toString(), Toast.LENGTH_SHORT).show();
+        uyelikTuru = mTextView.getText().toString();
+        return false;
+    }
 }
