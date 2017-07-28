@@ -1,12 +1,15 @@
 package com.tatlicilar.proje;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
@@ -38,10 +41,17 @@ public class KayitOl extends AppCompatActivity implements ExpandableListView.OnC
     public EditText password;
     public EditText email;
     private Button kaydol;
+    private Button date; // doğum tarihini değiştirmek için buton
+    private TextView tarih;//üye ismi ve doğum tarihi bilgisi
     private String userId;
     private String uyelikTuru;
+    private int year; // datepickerdaki yıl
+    private int month; //datepickerdaki ay
+    private int day; //datepickerdaki gün
+    private String picker_tarih;
     private ExpandableListAdapter mExpandableListAdapter;
     private ExpandableListView mExpandableListView;
+    static final int DATE_DIALOG_ID = 999;
 
     // Group/parent data
     private List<String> listDataHeader;
@@ -65,6 +75,20 @@ public class KayitOl extends AppCompatActivity implements ExpandableListView.OnC
         password = (EditText)findViewById(R.id.sifre);
         email = (EditText)findViewById(R.id.email);
         kaydol = (Button)findViewById(R.id.kaydol);
+        tarih= (TextView) findViewById(R.id.dtarih); //doğum tarihi
+        date = (Button)findViewById(R.id.tarihSec);//datepicker ı başlatmak için basılan buton
+
+        tarih.setText("01.01.1990"); //homepage açıldığında önceki classtan gelen bilgileri bu ekranda atıyorum
+        //doğum tarhi değiştirme butonuna basıldıysa handle ediyorum
+        date.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                showDialog(DATE_DIALOG_ID);
+            }
+        });
+
+
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mDatabaseReference = mFirebaseDatabase.getReference("users");
 
@@ -117,11 +141,12 @@ public class KayitOl extends AppCompatActivity implements ExpandableListView.OnC
         String soyadd = soyad.getText().toString();
         String parola = password.getText().toString();
         String mail = email.getText().toString();
+        String dtarihi = tarih.getText().toString();
 
             userId = mDatabaseReference.push().getKey();
 
 
-        Melek melek = new Melek(add, soyadd, parola, mail,uyelikTuru);
+        Melek melek = new Melek(add, soyadd, parola, mail,uyelikTuru,dtarihi);
 
         mDatabaseReference.child(userId).setValue(melek);
 
@@ -197,4 +222,25 @@ private void prepareListData() {
         uyelikTuru = mTextView.getText().toString();
         return false;
     }
+    //datepicker objesi yaratıyorum
+    protected Dialog onCreateDialog(int id){
+        if(id == DATE_DIALOG_ID)
+            return new DatePickerDialog(this,dpickerListener, year,month,day);
+        return null;
+    }
+    //datepickera basıldıysa handle ediyorum
+    //ay bilgisini aldığımda mevcut aydan hep 1 ay az gösterdi o yüzden +1 diyerek kullandım
+    private DatePickerDialog.OnDateSetListener dpickerListener
+            = new DatePickerDialog.OnDateSetListener(){
+        @Override
+        public void onDateSet(DatePicker view, int year, int month, int day){
+            if ((month+1) < 10){ //eğer ay tek haneli ise başına 0 ekledim
+                picker_tarih = day + ".0" + (month+1) + "." + year;
+            }
+            else{ //ay çift haneli ise olduğu gibi aldım
+                picker_tarih = day + "." + (month+1) + "." + year;
+            }
+            tarih.setText(picker_tarih) ;
+        }
+    };
 }

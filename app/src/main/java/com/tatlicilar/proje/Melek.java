@@ -12,13 +12,23 @@ public class Melek {
     private String parola;
     private String email;
     private String uyelikTuru;
+    private String tarih;
 //    private String uyelikTuru;
 //    private String tarih;
 //    private int resim;
 
     public Melek() {
     }
-    public Melek(String ad, String soyad, String parola, String email, String uyelikTuru ) {
+
+    public String getTarih() {
+        return tarih;
+    }
+
+    public void setTarih(String tarih) {
+        this.tarih = tarih;
+    }
+
+    public Melek(String ad, String soyad, String parola, String email, String uyelikTuru, String tarih ) {
 //        String uyelikTuru, String tarih, int resim, String url,
         this.uid = uid;
         this.ad = ad;
@@ -26,6 +36,8 @@ public class Melek {
         this.parola = parola;
         this.email = email;
         this.uyelikTuru = uyelikTuru;
+        this.tarih = tarih;
+
 //        this.uyelikTuru = uyelikTuru;
 //        this.tarih = tarih;
 //        this.resim = resim;
