@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.tatlicilar.proje">
 
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -18,6 +19,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".KayitOl" />
+        <activity android:name=".HomePage" />
+        <activity android:name=".GoogleSignIn" />
+        <activity android:name=".BaseActivity"></activity>
     </application>
 
 </manifest>

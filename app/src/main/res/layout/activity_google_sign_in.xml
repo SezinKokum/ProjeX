@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.tatlicilar.proje.GoogleSignIn">
+
+    <Button
+        android:id="@+id/SignIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign In"
+        tools:layout_editor_absoluteX="63dp"
+        tools:layout_editor_absoluteY="142dp" />
+
+    <Button
+        android:id="@+id/SignOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign Out"
+        tools:layout_editor_absoluteX="232dp"
+        tools:layout_editor_absoluteY="142dp" />
+
+    <TextView
+        android:id="@+id/Status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Status"
+        tools:layout_editor_absoluteX="162dp"
+        tools:layout_editor_absoluteY="258dp" />
+
+    <TextView
+        android:id="@+id/Detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Detail"
+        tools:layout_editor_absoluteX="162dp"
+        tools:layout_editor_absoluteY="302dp" />
+</LinearLayout>
