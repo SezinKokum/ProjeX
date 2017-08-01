@@ -23,5 +23,4 @@
         <activity android:name=".GoogleSignIn" />
         <activity android:name=".BaseActivity"></activity>
     </application>
-
 </manifest>

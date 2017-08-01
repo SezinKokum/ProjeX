@@ -12,10 +12,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.FacebookSdk;
+import com.facebook.login.widget.LoginButton;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
@@ -39,7 +42,8 @@ public class Login extends AppCompatActivity {
     private Button girisBtn;
     private CheckBox beniHatirla;
     private Button facebookBtn;
-    private Button googleBtn;
+    private SignInButton google2;
+    private LoginButton facebook2;
     private Button kaydolBtn;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
@@ -56,8 +60,8 @@ public class Login extends AppCompatActivity {
         password = (EditText)findViewById(R.id.password);
         girisBtn = (Button)findViewById(R.id.girisBtn);
         beniHatirla = (CheckBox)findViewById(R.id.beniHatirla);
-        facebookBtn = (Button)findViewById(R.id.facebook);
-        googleBtn = (Button)findViewById(R.id.google);
+//        facebook2 = (LoginButton)findViewById(R.id.facebook2);
+        google2 = (SignInButton)findViewById(R.id.google2);
         kaydolBtn = (Button)findViewById(R.id.kayitBtn);
 
         kaydolBtn.setOnClickListener(new View.OnClickListener() {
@@ -70,7 +74,7 @@ public class Login extends AppCompatActivity {
 
 
 
-        googleBtn.setOnClickListener(new View.OnClickListener() {
+        google2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 intent2 = new Intent(Login.this, GoogleSignIn.class);
@@ -78,5 +82,14 @@ public class Login extends AppCompatActivity {
             }
 
     });
+
+//        facebook2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                intent2 = new Intent(Login.this, GoogleSignIn.class);
+//                startActivity(intent2);
+//            }
+//
+//        });
 }
 }

@@ -69,7 +69,8 @@ public class GoogleSignIn extends BaseActivity implements
         mAuthStateListener = new FirebaseAuth.AuthStateListener(){
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth){
-//                FirebaseUser user = new firebaseAuth.getCurrentUser();
+//                FirebaseUser user;
+//                user = new firebaseAuth.getCurrentUser();
 //                if(user != null){
 //                    Log.d(TAG,"OnAuthStateChanged:signed_in:" + user.getUid());
 //                }else{
