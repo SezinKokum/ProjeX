@@ -45,13 +45,16 @@ public class Login extends AppCompatActivity {
     private SignInButton google2;
     private LoginButton facebook2;
     private Button kaydolBtn;
+    public static final int RC_SIGN_IN = 1;
+    private ChildEventListener mChildEventListener;
+    Intent intent, intent2, intent3;
+    public static final String ANONYMOUS = "anonymous";
+
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
-    public static final int RC_SIGN_IN = 1;
     private String mUsername;
-    private ChildEventListener mChildEventListener;
-    Intent intent, intent2;
-    public static final String ANONYMOUS = "anonymous";
+
+    private FirebaseDatabase mFirebaseDatabase; // access database
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,9 +64,13 @@ public class Login extends AppCompatActivity {
         girisBtn = (Button)findViewById(R.id.girisBtn);
         beniHatirla = (CheckBox)findViewById(R.id.beniHatirla);
 //        facebook2 = (LoginButton)findViewById(R.id.facebook2);
-        google2 = (SignInButton)findViewById(R.id.google2);
+//        google2 = (SignInButton)findViewById(R.id.google2);
         kaydolBtn = (Button)findViewById(R.id.kayitBtn);
 
+//        mUsername = ANONYMOUS;
+//
+//        mFirebaseDatabase = FirebaseDatabase.getInstance();
+//        mFirebaseAuth = FirebaseAuth.getInstance();
         kaydolBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,14 +81,51 @@ public class Login extends AppCompatActivity {
 
 
 
-        google2.setOnClickListener(new View.OnClickListener() {
+//        google2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                intent2 = new Intent(Login.this, GoogleSignIn.class);
+//                startActivity(intent2);
+//            }
+//
+//        });
+
+        girisBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent2 = new Intent(Login.this, GoogleSignIn.class);
-                startActivity(intent2);
+                intent3 = new Intent(Login.this, HomePage.class);
+                startActivity(intent3);
             }
 
-    });
+        });
+
+//        mAuthStateListener = new FirebaseAuth.AuthStateListener(){
+//            @Override
+//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+//                FirebaseUser user = firebaseAuth.getCurrentUser();
+//                if(user!= null){
+//                    //user is signed in
+//                    Toast.makeText(Login.this,"You are now signed in. Welcome to DownToUp!", Toast.LENGTH_SHORT).show();
+//                    onSignedInInitialize(user.getDisplayName());
+//                }
+//                else{
+//                    //user is signed out
+//                    onSignedOutCleanup();
+//                    startActivityForResult(
+//                            AuthUI.getInstance()
+//                                    .createSignInIntentBuilder()
+//                                    .setIsSmartLockEnabled(false)
+//                                    .setProviders(
+//                                            AuthUI.EMAIL_PROVIDER,
+//                                            AuthUI.GOOGLE_PROVIDER,
+//                                            AuthUI.FACEBOOK_PROVIDER
+//                                    )
+//                                    .build(),
+//                            RC_SIGN_IN);
+//                }
+//            }
+//        };
+    }
 
 //        facebook2.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -91,5 +135,14 @@ public class Login extends AppCompatActivity {
 //            }
 //
 //        });
-}
+    private void onSignedInInitialize(String username) {
+        mUsername = username;
+//        attachDatabaseReadListener();
+    }
+    private void onSignedOutCleanup() {
+        mUsername = ANONYMOUS;
+//        mMessageAdapter.clear();
+//        detachDatabaseReadListener();
+    }
+
 }
