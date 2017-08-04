@@ -67,10 +67,9 @@ public class Login extends AppCompatActivity {
 //        google2 = (SignInButton)findViewById(R.id.google2);
         kaydolBtn = (Button)findViewById(R.id.kayitBtn);
 
-//        mUsername = ANONYMOUS;
-//
-//        mFirebaseDatabase = FirebaseDatabase.getInstance();
-//        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mFirebaseAuth = FirebaseAuth.getInstance();
+
         kaydolBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,33 +97,32 @@ public class Login extends AppCompatActivity {
             }
 
         });
-
-//        mAuthStateListener = new FirebaseAuth.AuthStateListener(){
-//            @Override
-//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-//                FirebaseUser user = firebaseAuth.getCurrentUser();
-//                if(user!= null){
-//                    //user is signed in
-//                    Toast.makeText(Login.this,"You are now signed in. Welcome to DownToUp!", Toast.LENGTH_SHORT).show();
-//                    onSignedInInitialize(user.getDisplayName());
-//                }
-//                else{
-//                    //user is signed out
+        mAuthStateListener = new FirebaseAuth.AuthStateListener(){
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if(user!= null){
+                    //user is signed in
+                    Toast.makeText(Login.this,"You are now signed in. Welcome to FriendlyChat!", Toast.LENGTH_SHORT).show();
+                    onSignedInInitialize(user.getDisplayName());
+                }
+                else{
+                    //user is signed out
 //                    onSignedOutCleanup();
-//                    startActivityForResult(
-//                            AuthUI.getInstance()
-//                                    .createSignInIntentBuilder()
-//                                    .setIsSmartLockEnabled(false)
-//                                    .setProviders(
-//                                            AuthUI.EMAIL_PROVIDER,
-//                                            AuthUI.GOOGLE_PROVIDER,
+                    startActivityForResult(
+                            AuthUI.getInstance()
+                                    .createSignInIntentBuilder()
+                                    .setIsSmartLockEnabled(false)
+                                    .setProviders(
+                                            AuthUI.EMAIL_PROVIDER,
+                                            AuthUI.GOOGLE_PROVIDER
 //                                            AuthUI.FACEBOOK_PROVIDER
-//                                    )
-//                                    .build(),
-//                            RC_SIGN_IN);
-//                }
-//            }
-//        };
+                                    )
+                                    .build(),
+                            RC_SIGN_IN);
+                }
+            }
+        };
     }
 
 //        facebook2.setOnClickListener(new View.OnClickListener() {
@@ -139,10 +137,10 @@ public class Login extends AppCompatActivity {
         mUsername = username;
 //        attachDatabaseReadListener();
     }
-    private void onSignedOutCleanup() {
-        mUsername = ANONYMOUS;
-//        mMessageAdapter.clear();
-//        detachDatabaseReadListener();
-    }
+//    private void onSignedOutCleanup() {
+//        mUsername = ANONYMOUS;
+////        mMessageAdapter.clear();
+////        detachDatabaseReadListener();
+//    }
 
 }
