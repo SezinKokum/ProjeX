@@ -22,7 +22,9 @@
         <activity android:name=".HomePage" />
         <activity android:name=".GoogleSignIn" />
         <activity android:name=".BaseActivity" />
-        <activity android:name=".ChatActivity"></activity>
+        <activity android:name=".ChatActivity" />
+        <activity android:name=".EgitimActivity" />
+        <activity android:name=".WebViewActivity"></activity>
     </application>
 
 </manifest>

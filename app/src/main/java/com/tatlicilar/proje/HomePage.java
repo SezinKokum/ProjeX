@@ -9,18 +9,29 @@ import android.widget.Button;
 public class HomePage extends AppCompatActivity {
 
     private Button chatBtn;
-    Intent intent;
+    private Button egitimBtn;
+    Intent intent, intent2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         chatBtn = (Button)findViewById(R.id.chatBtn);
+        egitimBtn = (Button)findViewById(R.id.egitimBtn);
 
         chatBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 intent = new Intent(HomePage.this, ChatActivity.class);
                 startActivity(intent);
+            }
+
+        });
+
+        egitimBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent2 = new Intent(HomePage.this, EgitimActivity.class);
+                startActivity(intent2);
             }
 
         });
