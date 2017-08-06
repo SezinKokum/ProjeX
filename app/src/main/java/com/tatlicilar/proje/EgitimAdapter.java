@@ -72,7 +72,7 @@ public class EgitimAdapter extends RecyclerView.Adapter<EgitimAdapter.MyViewHold
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder=new AlertDialog.Builder(context);
-                builder.setMessage("Kitabı okudun mu?");
+                builder.setMessage("Eğitimi almak ister misin?");
                 builder.setCancelable(true);
                 builder.setPositiveButton("Evet", new DialogInterface.OnClickListener() {
                     @Override

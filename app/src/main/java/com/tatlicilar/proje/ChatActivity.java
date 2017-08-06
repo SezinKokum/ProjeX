@@ -126,7 +126,7 @@ public class ChatActivity extends AppCompatActivity {
                     Toast.makeText(ChatActivity.this,"You are now signed in. Welcome to FriendlyChat!", Toast.LENGTH_SHORT).show();
                     onSignedInInitialize(user.getDisplayName());
                 }
-                else{
+                else{//bahsettiğim provider burası
                     //user is signed out
                     onSignedOutCleanup();
                     startActivityForResult(

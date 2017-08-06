@@ -64,7 +64,7 @@ public class Login extends AppCompatActivity {
         girisBtn = (Button)findViewById(R.id.girisBtn);
         beniHatirla = (CheckBox)findViewById(R.id.beniHatirla);
 //        facebook2 = (LoginButton)findViewById(R.id.facebook2);
-//        google2 = (SignInButton)findViewById(R.id.google2);
+        google2 = (SignInButton)findViewById(R.id.google2);
         kaydolBtn = (Button)findViewById(R.id.kayitBtn);
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -77,10 +77,13 @@ public class Login extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
-
-//        google2.setOnClickListener(new View.OnClickListener() {
+ //buradan googlesignin activitysine gidip orda authentication devreye girecek ve
+//       kişiden google bilgilerini isteyecek ama aslında buna gerek kalmadan
+// chat activity deki gibi provider kullanarak da getirtebilir miyim diye
+// düşünüp xmlden butonları kapamıştım, şu anda da facebook butonu commentli çünkü
+// facebook authenticesi için gradle ımda bir ekleme yok henüz
+// okurken ne yazmış kız diye kızmayın öpüyorum neval hocam :* siz bunları okurken ben yolda olacağım..:(
+// google2.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
 //                intent2 = new Intent(Login.this, GoogleSignIn.class);
@@ -89,6 +92,8 @@ public class Login extends AppCompatActivity {
 //
 //        });
 
+        //şu an authentice olmadan direkt giriş yap deyince anasayfaya geçirdim
+        //anasayfada chat ve eğitim kategori butonları var
         girisBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
