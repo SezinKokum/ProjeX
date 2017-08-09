@@ -15,9 +15,16 @@
         tools:layout_editor_absoluteY="127dp" />
 
     <Button
-        android:id="@+id/egitimBtn"
+    android:id="@+id/egitimBtn"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:text="Eğitim Kategoriler" />
+
+    <Button
+        android:id="@+id/profilBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Eğitim Kategoriler" />
+        android:text="Proil" />
 </LinearLayout>

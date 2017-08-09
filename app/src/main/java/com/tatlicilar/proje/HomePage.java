@@ -10,14 +10,15 @@ public class HomePage extends AppCompatActivity {
 
     private Button chatBtn;
     private Button egitimBtn;
-    Intent intent, intent2;
+    private Button profilBtn;
+    Intent intent, intent2, intent3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         chatBtn = (Button)findViewById(R.id.chatBtn);
         egitimBtn = (Button)findViewById(R.id.egitimBtn);
-
+        profilBtn= (Button)findViewById(R.id.profilBtn);
         chatBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -36,5 +37,13 @@ public class HomePage extends AppCompatActivity {
 
         });
 
+        profilBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent3 = new Intent(HomePage.this, Profil.class);
+                startActivity(intent3);
+            }
+
+        });
     }
 }

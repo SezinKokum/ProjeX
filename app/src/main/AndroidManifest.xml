@@ -24,7 +24,8 @@
         <activity android:name=".BaseActivity" />
         <activity android:name=".ChatActivity" />
         <activity android:name=".EgitimActivity" />
-        <activity android:name=".WebViewActivity"></activity>
+        <activity android:name=".WebViewActivity" />
+        <activity android:name=".Profil"></activity>
     </application>
 
 </manifest>
