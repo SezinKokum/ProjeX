@@ -40,7 +40,9 @@
             android:id="@+id/resimdegistirBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button"
+            android:text="değiştir"
+            android:background="#FF4500"
+            android:textColor="#FFFAF0"
             android:layout_alignParentBottom="true"
             android:layout_toEndOf="@+id/profilResmi" />
 
@@ -92,8 +94,8 @@
             android:layout_weight="0.12">
 
             <Button
-                android:layout_marginLeft="20dp"
-                android:layout_width="170dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="180dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="10dp"
                 android:background="#9F575C"
@@ -104,7 +106,7 @@
                 android:id="@+id/paylasilanBtn"/>
 
             <Button
-                android:layout_width="170dp"
+                android:layout_width="180dp"
                 android:layout_height="100dp"
                 android:layout_marginLeft="200dp"
                 android:layout_marginTop="10dp"
@@ -146,6 +148,19 @@
                 android:text="Neredeyim?
                 Konum"
                 android:id="@+id/konumBtn"/>
+
+            <Button
+                android:layout_width="170dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="200dp"
+                android:layout_marginTop="10dp"
+                android:background="#8acfff"
+                android:text="E-book"
+                android:textAllCaps="false"
+                android:textColor="#c55000"
+                android:textSize="18dp"
+                android:id="@+id/e-bookBtn"/>
+
         </RelativeLayout>
 
 
