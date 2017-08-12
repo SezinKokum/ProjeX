@@ -159,7 +159,7 @@
                 android:textAllCaps="false"
                 android:textColor="#c55000"
                 android:textSize="18dp"
-                android:id="@+id/e-bookBtn"/>
+                android:id="@+id/ebookBtn"/>
 
         </RelativeLayout>
 
