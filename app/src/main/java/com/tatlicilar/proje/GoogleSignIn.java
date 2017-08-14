@@ -145,17 +145,17 @@ public class GoogleSignIn extends BaseActivity implements
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
     private void signOut() {
-        // Firebase sign out
+        //Firebase sign out
         mFirebaseAuth.signOut();
 
-        // Google sign out
-        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
-                new ResultCallback<Status>() {
-                    @Override
+       //  Google sign out
+       Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
+               new ResultCallback<Status>() {
+                   @Override
                     public void onResult(@NonNull Status status) {
-                        updateUI(null);
-                    }
-                });
+                       updateUI(null);
+                   }
+               });
     }
     private void revokeAccess() {
         // Firebase sign out
@@ -201,9 +201,9 @@ public class GoogleSignIn extends BaseActivity implements
         case R.id.SignIn:
             signIn();
             break;
-        case R.id.SignOut:
+       case R.id.SignOut:
             signOut();
-            break;
+           break;
 
     }
     }
