@@ -15,7 +15,8 @@ public class Profil extends AppCompatActivity {
     private Button acilBtn;
     private Button paylasilanlarBtn;
     private Button mesajlarBtn;
-    private Intent intent, intent2,intent3;
+    private Button arkadasBtn;
+    private Intent intent, intent2,intent3, intent4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,7 @@ public class Profil extends AppCompatActivity {
         acilBtn = (Button)findViewById(R.id.acilBtn);
         paylasilanlarBtn = (Button)findViewById(R.id.paylasilanBtn);
         mesajlarBtn =(Button)findViewById(R.id.mesajlarBtn);
+        arkadasBtn = (Button)findViewById(R.id.arkadasBtn);
         degistirBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,6 +56,14 @@ public class Profil extends AppCompatActivity {
             public void onClick(View view) {
                 intent3 = new Intent(Profil.this, ChatActivity.class);
                 startActivity(intent3);
+            }
+        });
+
+        arkadasBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent4 = new Intent(Profil.this, CustomViewIconTextTabsActivity.class);
+                startActivity(intent4);
             }
         });
     }

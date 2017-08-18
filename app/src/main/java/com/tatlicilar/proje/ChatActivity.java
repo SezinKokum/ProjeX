@@ -188,6 +188,7 @@ public class ChatActivity extends AppCompatActivity {
         mUsername = ANONYMOUS;
         mMessageAdapter.clear();
         detachDatabaseReadListener();
+        startActivity(new Intent(ChatActivity.this, Login.class));
     }
 
     private void detachDatabaseReadListener() {

@@ -3,6 +3,8 @@ package com.tatlicilar.proje;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -17,8 +19,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -36,6 +43,9 @@ public class KayitOl extends AppCompatActivity implements ExpandableListView.OnC
     private static final String TAG = KayitOl.class.getSimpleName();
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
+
+    private final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+
     private ChildEventListener mChildEventListener;
     public EditText ad;
     public EditText soyad;
@@ -98,42 +108,23 @@ public class KayitOl extends AppCompatActivity implements ExpandableListView.OnC
             @Override
             public void onClick(View view) {
                 // TODO: Send messages on click
-                    createUser();
+                String parola = password.getText().toString();
+                String mail = email.getText().toString();
+                firebaseAuth.createUserWithEmailAndPassword(mail, parola)
+                        .addOnCompleteListener(KayitOl.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    createUser();
+                                    kullaniciGuncelle();
+                                } else {
+                                    Log.e("Yeni Kullanıcı Hatası", task.getException().getMessage());
+                                }
+                            }
+                        });
+
             }
         });
-
-//        mChildEventListener = new ChildEventListener() {
-//
-//            @Override
-//            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-//                // ne zaman yeni mesaj eklenirse tetiklenecek
-//                //giden mesajı alır friendlymessage objesine çevirir ve adapter e ekler ve listviewde basılacak
-//                Melek melek = dataSnapshot.getValue(Melek.class); // onjeyi deserialize edecek
-////                mMessageAdapter.add(friendlyMessage);
-//            }
-//
-//            @Override
-//            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-//                //var olan mesajın contenti değiştiğinde tetiklenecek
-//            }
-//
-//            @Override
-//            public void onChildRemoved(DataSnapshot dataSnapshot) {
-//                //var olan mesaj silindiğinde tetiklenecek
-//            }
-//
-//            @Override
-//            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-//                //mesajdakiler pozisyon değiştirirse tetiklenecek
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                //değişiklik yaparken hata oluşursa tetiklenecek
-//            }
-//        };
-//
-//        mDatabaseReference.addChildEventListener(mChildEventListener);
     }
     private void createUser() {
         // TODO
@@ -151,7 +142,8 @@ public class KayitOl extends AppCompatActivity implements ExpandableListView.OnC
         Melek melek = new Melek(add, soyadd, parola, mail,uyelikTuru,dtarihi);
 
         mDatabaseReference.child(userId).setValue(melek);
-
+        Toast.makeText(KayitOl.this, "Adım ." + add,
+                Toast.LENGTH_SHORT).show();
         addUserChangeListener();
     }
     /**
@@ -245,4 +237,23 @@ private void prepareListData() {
             tarih.setText(picker_tarih) ;
         }
     };
+    private void kullaniciGuncelle() {
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+
+        UserProfileChangeRequest userProfileChangeRequest = new UserProfileChangeRequest.Builder()
+                .setDisplayName("Takma Adınız")
+                .setPhotoUri(null)
+                .build();
+
+        firebaseUser.updateProfile(userProfileChangeRequest)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (!task.isSuccessful()) {
+                            Log.e("Güncelleme Hatası", task.getException().getMessage());
+                        }
+                        startActivity(new Intent(KayitOl.this, Profil.class));
+                    }
+                });
+    }
 }

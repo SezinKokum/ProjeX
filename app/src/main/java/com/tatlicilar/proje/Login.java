@@ -126,23 +126,35 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                     Toast.makeText(getApplicationContext(), "Lütfen parolanızı giriniz", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                
+
                 //Firebase üzerinde kullanıcı doğrulamasını başlatıyoruz
                 //Eğer giriş başarılı olursa task.isSuccessful true dönecek ve MainActivity e geçilecek
                 //mDatabaseReference = mFirebaseDatabase.getReference("users");
 
-                mFirebaseAuth.signInWithEmailAndPassword(email2, password2).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d("TAG", "signInWithEmail:onComplete:" + task.isSuccessful());
+//                mFirebaseAuth.signInWithEmailAndPassword(email2, password2).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<AuthResult> task) {
+//                        Log.d("TAG", "signInWithEmail:onComplete:" + task.isSuccessful());
+//
+//                        if (!task.isSuccessful()) {
+//                            Log.w("TAG", "signInWithEmail", task.getException());
+//                            Toast.makeText(Login.this, "Authentication failed.",
+//                                    Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                });
 
-                        if (!task.isSuccessful()) {
-                            Log.w("TAG", "signInWithEmail", task.getException());
-                            Toast.makeText(Login.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                mFirebaseAuth.signInWithEmailAndPassword(email2, password2)
+                        .addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    startActivity(new Intent(Login.this, Profil.class));
+                                } else {
+                                    Log.e("Giriş Hatası", task.getException().getMessage());
+                                }
+                            }
+                        });
 
                 // responds to changes in the user's sign-in state
                 mAuthStateListener = new FirebaseAuth.AuthStateListener() {
@@ -176,23 +188,23 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if(user!= null){
                     //user is signed in
-                    Toast.makeText(Login.this,"You are now signed in. Welcome to FriendlyChat!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this,"Senin adın" + user.getEmail().toString(), Toast.LENGTH_SHORT).show();
                     //onSignedInInitialize(user.getDisplayName());
                 }
                 else{
                     //user is signed out
                   //  onSignedOutCleanup();
-                    startActivityForResult(
-                            AuthUI.getInstance()
-                                    .createSignInIntentBuilder()
-                                    .setIsSmartLockEnabled(false)
-                                    .setProviders(
-                                            AuthUI.EMAIL_PROVIDER,
-                                            AuthUI.GOOGLE_PROVIDER
-//                                            AuthUI.FACEBOOK_PROVIDER
-                                    )
-                                    .build(),
-                            RC_SIGN_IN);
+//                    startActivityForResult(
+//                            AuthUI.getInstance()
+//                                    .createSignInIntentBuilder()
+//                                    .setIsSmartLockEnabled(false)
+//                                    .setProviders(
+//                                            AuthUI.EMAIL_PROVIDER,
+//                                            AuthUI.GOOGLE_PROVIDER
+////                                            AuthUI.FACEBOOK_PROVIDER
+//                                    )
+//                                    .build(),
+//                            RC_SIGN_IN);
                 }
             }
         };
